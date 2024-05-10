@@ -3,7 +3,7 @@ package MoUnWan.MoUnWan;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = MoUnWanApplicationTests.class)
 class MoUnWanApplicationTests {
 
 	@Test
