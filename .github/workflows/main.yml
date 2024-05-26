@@ -9,9 +9,9 @@ on:
 # --------------------------추가
 env:
   PROJECT_NAME: MoUnWan
-  BUCKET_NAME: mounwan_deploy
-  CODE_DEPLOY_APP_NAME: mounwanm_cicd
-  DEPLOYMENT_GROUP_NAME: mounwan_instance
+  BUCKET_NAME: mounwan-deploy
+  CODE_DEPLOY_APP_NAME: mounwanm-Cicd
+  DEPLOYMENT_GROUP_NAME: mounwan-instance
 # --------------------------추가
 
 jobs:
