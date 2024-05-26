@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-REPOSITORY=/home/ec2console/mounwan
+REPOSITORY=/home/ubuntu/mounwan
 cd $REPOSITORY
 
 APP_NAME=MoUnWan
