@@ -11,7 +11,7 @@ env:
   PROJECT_NAME: mounwan-project
   BUCKET_NAME: mounwan-cicd-buket
   CODE_DEPLOY_APP_NAME: mounwan-deploy
-  DEPLOYMENT_GROUP_NAME: mounwan_deploy-group
+  DEPLOYMENT_GROUP_NAME: mounwan-deploy-group
 # --------------------------추가
 
 jobs:
