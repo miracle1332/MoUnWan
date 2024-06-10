@@ -6,6 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity @Getter @Setter @EqualsAndHashCode(of = "id")
 @Builder @AllArgsConstructor @NoArgsConstructor
@@ -36,15 +37,15 @@ public class Account { //계정관리
     @Basic(fetch = FetchType.EAGER)
     private String profileImage;
 
-    private boolean gatheringCreatedByEmail; //스터디 오픈소식을 이메일로 받을것인가
+    private boolean gatheringCreatedByEmail;
 
-    private boolean gatheringCreatedByWeb = true; //웹으로 받을 것인가
+    private boolean gatheringCreatedByWeb = true;
 
-    private boolean gatheringEnrollmentResultByEmail; //스터디 가입신청 결과를 이메일로 받을것인가
+    private boolean gatheringEnrollmentResultByEmail;
 
-    private boolean gatheringEnrollmentResultByWeb = true; //웹으로 받을것인가
+    private boolean gatheringEnrollmentResultByWeb = true;
 
-    private boolean gatheringUpdatedByEmail; //스터디 갱신 정보
+    private boolean gatheringUpdatedByEmail;
 
     private boolean gatheringUpdatedByWeb = true;
 
@@ -52,4 +53,8 @@ public class Account { //계정관리
     private Set<Categories> categories = new HashSet<>();
 
 
+    public void generateEmailCheckToken() {
+        this.emailCheckToken = UUID.randomUUID().toString();
+        this.emailCheckTokenTime = LocalDateTime.now();
+    }
 }
