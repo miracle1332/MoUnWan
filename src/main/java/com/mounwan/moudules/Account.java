@@ -57,4 +57,13 @@ public class Account { //계정관리
         this.emailCheckToken = UUID.randomUUID().toString();
         this.emailCheckTokenTime = LocalDateTime.now();
     }
+
+    public boolean isValidToken(String token) {
+        return this.emailCheckTokenTime.equals(token);
+    }
+
+    public void completeSignUp() {
+        this.emailVerified = true;
+        this.joinTime = LocalDateTime.now();
+    }
 }

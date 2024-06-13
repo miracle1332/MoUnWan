@@ -7,7 +7,7 @@ import org.springframework.validation.Validator;
 
 @Component
 @RequiredArgsConstructor
-public class signUpFormValidator implements Validator {
+public class SignUpFormValidator implements Validator {
 
 
     @Override
