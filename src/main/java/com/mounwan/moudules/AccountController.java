@@ -59,8 +59,5 @@ public class AccountController {
         return "account/checked-email";
     }
 
-    @GetMapping("/checked-email")
-    public String checkEmail() {
 
-    }
 }
