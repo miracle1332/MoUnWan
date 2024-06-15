@@ -54,6 +54,8 @@ task copyFrontLib(type: Copy) {
 }
 copyFrontLib.dependsOn npmInstall
 compileJava.dependsOn copyFrontLib
+processResources.dependsOn npmInstall
+
 
 tasks.named('bootBuildImage') {
 	builder = 'paketobuildpacks/builder-jammy-base:latest'
