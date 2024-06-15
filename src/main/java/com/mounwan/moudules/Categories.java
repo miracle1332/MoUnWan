@@ -19,6 +19,6 @@ public class Categories {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String title;
+    private String titleOfWorkOut;
 
 }
