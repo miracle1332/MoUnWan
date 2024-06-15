@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.10'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id "com.github.node-gradle.node" version "2.2.3"
 }
 
 group = 'MoUnWan'
@@ -10,7 +11,11 @@ version = '0.0.1-SNAPSHOT'
 java {
 	sourceCompatibility = '17'
 }
-
+node {
+	version = '10.8.0'
+	download = true
+	nodeModulesDir = file("${projectDir}/src/main/resources/static")
+}
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -32,6 +37,8 @@ dependencies {
 	implementation 'org.springframework.session:spring-session-core'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
+	implementation 'org.webjars:bootstrap:5.3.3'
+	implementation 'org.webjars:jquery:3.7.1'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
@@ -40,6 +47,15 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 
 }
+
+task copyFrontLib(type: Copy) {
+	from "${projectDir}/src/main/resources/static"
+	into "${projectDir}/build/resources/main/static/."
+}
+copyFrontLib.dependsOn npmInstall
+compileJava.dependsOn copyFrontLib
+processResources.dependsOn npmInstall
+
 
 tasks.named('bootBuildImage') {
 	builder = 'paketobuildpacks/builder-jammy-base:latest'

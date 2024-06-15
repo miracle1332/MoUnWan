@@ -3,12 +3,17 @@ package com.mounwan.moudules;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -45,11 +50,24 @@ public class AccountService implements UserDetailsService {
         if (account == null) {
             account = accountRepository.findByNickname(emailOrNickname);
         }
-        //그랬는데도 못찾으믄
+        //그
         if (account == null) {
             throw new UsernameNotFoundException(emailOrNickname);
         }
         return new UserAccount(account); //프린시펄에 해당하는 객체를 넘기면 된다.
-        //UserAccount에 스프링시큐리티가 제공한 유저를 확장한 유저어카운트이다.
+
+    }
+    public void login(Account account) {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                new UserAccount(account), //로그인 유저가 되는 principal객체
+                account.getPassword(),
+                List.of(new SimpleGrantedAuthority("ROLE_USER")));
+        SecurityContextHolder.getContext().setAuthentication(token);
+
+    }
+
+    public void completeSignUp(Account account) {
+        account.completeSignUp();
+        login(account);
     }
 }
